@@ -15,3 +15,18 @@ const getProducts = () => {
         
     }
 } 
+const addProducts = (product) => {
+    return {
+        type: ADD_PRODUCTS,
+        payload: product
+    }
+}
+
+// productReducer
+const productReducer = (state = initialProductState, action) => {
+    if(action.type === getProducts) {
+        return {
+            
+        }
+    }
+}
