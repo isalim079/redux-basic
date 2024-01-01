@@ -63,7 +63,7 @@ const { legacy_createStore } = require("redux")
 // Making full counter app with redux
 
 // Constants
-const INCREMENT = "INCREMENT"
+/* const INCREMENT = "INCREMENT"
 const DECREMENT = 'DECREMENT'
 const RESET = 'RESET'
 
@@ -118,4 +118,91 @@ store.dispatch(incrementAction())
 store.dispatch(incrementAction())
 store.dispatch(incrementAction())
 store.dispatch(decrementAction())
-store.dispatch(resetAction())
+store.dispatch(resetAction()) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// payload practice
+
+const INCREMENT = "INCREMENT"
+const INCREMENT_BY_VALUE = "INCREMENT_BY_VALUE"
+const DECREMENT = 'DECREMENT'
+const RESET = 'RESET'
+
+const initialCounterState = {
+    count: 0
+}
+const incrementAction = () => {
+    return {
+        type: INCREMENT
+    } 
+}
+const incrementByValueAction = (value) => {
+    return {
+        type: INCREMENT_BY_VALUE,
+        payload: value
+    } 
+}
+const decrementAction = () => {
+    return {
+        type: DECREMENT
+    }
+}
+
+const resetAction = () => {
+    return {
+        type: RESET
+    }
+}
+
+// creating reducer
+const counterReducer = (state= initialCounterState, action) => {
+    switch(action.type) {
+        case INCREMENT: 
+        return {
+            ...state,
+            count: state.count + 1
+        }
+        case DECREMENT: 
+        return {
+            ...state,
+            count: state.count - 1
+        }
+        case RESET: 
+        return {
+            ...state,
+            count: 0
+        }
+        case INCREMENT_BY_VALUE: 
+        return {
+            ...state,
+            count: action.payload + state.count
+        }
+        default: state
+    }
+}
+
+// store
+const store = legacy_createStore(counterReducer)
+store.subscribe(() => {
+    console.log(store.getState());
+})
+// store.dispatch(incrementAction())
+// store.dispatch(incrementAction())
+// store.dispatch(incrementAction())
+// store.dispatch(decrementAction())
+// store.dispatch(resetAction())
+store.dispatch(incrementByValueAction(13))
