@@ -26,7 +26,16 @@ const addProducts = (product) => {
 const productReducer = (state = initialProductState, action) => {
     if(action.type === getProducts) {
         return {
-            
+            ...state
         }
     }
+    if(action.type === addProducts) {
+        return {
+            products: [...state.products, action.payload], 
+            numberOfProducts: state.numberOfProducts + 1
+        }
+    }
+    return state
 }
+
+// creating store
