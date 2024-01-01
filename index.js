@@ -1,3 +1,5 @@
+import { legacy_createStore as createStore } from "redux";
+
 const INCREMENT = "INCREMENT";
 const DECREMENT = "DECREMENT";
 const ADD_USER = "ADD_USER";
@@ -18,9 +20,31 @@ const decrementCounter = () => {
         type: DECREMENT,
     };
 };
-const addUser = () => {
-    return {
-        type: ADD_USER,
-        payload: { name: "SRS" },
-    };
-};
+
+// reducer
+const counterReducer = (state = initialCounterState, action) => {
+    if(action.type === INCREMENT){
+        return {
+            counter: state.counter + 1
+        }
+    }
+    if(action.type === DECREMENT){
+        return {
+            counter: state.counter - 1
+        }
+    }
+}
+
+
+// const addUser = () => {
+//     return {
+//         type: ADD_USER,
+//         payload: { name: "SRS" },
+//     };
+// };
+
+
+const store = createStore(counterReducer)
+store.subscribe(() => {
+    console.log(store.getState());
+})
