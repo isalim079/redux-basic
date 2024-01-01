@@ -136,7 +136,7 @@ store.dispatch(resetAction()) */
 
 
 // payload practice
-
+/* 
 const INCREMENT = "INCREMENT"
 const INCREMENT_BY_VALUE = "INCREMENT_BY_VALUE"
 const DECREMENT = 'DECREMENT'
@@ -196,7 +196,7 @@ const counterReducer = (state= initialCounterState, action) => {
 }
 
 // store
-const store = legacy_createStore(counterReducer)
+// const store = legacy_createStore(counterReducer)
 store.subscribe(() => {
     console.log(store.getState());
 })
@@ -205,4 +205,36 @@ store.subscribe(() => {
 // store.dispatch(incrementAction())
 // store.dispatch(decrementAction())
 // store.dispatch(resetAction())
-store.dispatch(incrementByValueAction(13))
+store.dispatch(incrementByValueAction(13)) */
+
+
+// adding users
+const ADD_USER = "ADD_USER"
+
+const initialState = {
+    users: ['Anis']
+}
+
+const addUser = (user) => {
+    return {
+        type: ADD_USER,
+        payload: user
+    }
+}
+
+const userReducer = (state=initialState, action) => {
+    switch(action.type){
+        case ADD_USER: 
+        return {
+            users: [...state.users, action.payload],
+            // count: state.count + 1
+
+
+        }
+    }
+}
+const store = legacy_createStore(userReducer)
+store.subscribe(() => {
+    console.log(store.getState());
+})
+store.dispatch(addUser("Nibir"))
